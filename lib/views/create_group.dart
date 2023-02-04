@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:book/global/global.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,8 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 
 class CreateGroup extends StatefulWidget {
   const CreateGroup({super.key});
@@ -26,6 +30,30 @@ class _CreateGroupState extends State<CreateGroup> {
   late DateTime _selectedDate;
   String dateText = "";
   late String time;
+  XFile? imageXfile;
+  final ImagePicker _picker = ImagePicker();
+  Future<void> _getImage() async {
+    imageXfile = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageXfile;
+    });
+  }
+
+  String bookImageUrl = "";
+
+  uploadImage() async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    fStorage.Reference reference =
+        fStorage.FirebaseStorage.instance.ref().child("Seller").child(fileName);
+
+    fStorage.UploadTask uploadTask = reference.putFile(File(imageXfile!.path));
+
+    fStorage.TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+
+    await taskSnapshot.ref.getDownloadURL().then((url) {
+      bookImageUrl = url;
+    });
+  }
 
   @override
   void initState() {
@@ -41,7 +69,7 @@ class _CreateGroupState extends State<CreateGroup> {
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: Colors.black87),
+          decoration: BoxDecoration(color: Colors.white),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,6 +112,45 @@ class _CreateGroupState extends State<CreateGroup> {
                               color: Colors.blue[500],
                               fontWeight: FontWeight.bold))
                           .make(),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _getImage();
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                    radius:
+                                        MediaQuery.of(context).size.width * 0.1,
+                                    backgroundColor: Colors.grey[600],
+                                    backgroundImage: imageXfile == null
+                                        ? null
+                                        : FileImage(File(imageXfile!.path)),
+                                    child: imageXfile == null
+                                        ? Icon(
+                                            Icons.add_a_photo_outlined,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.1,
+                                            color: Colors.white,
+                                          )
+                                        : null),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                "Choose the picture".text.make()
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(
                         height: 25,
                       ),
@@ -168,7 +235,8 @@ class _CreateGroupState extends State<CreateGroup> {
       "authorName": _authorController.text,
       "bookName": _bookNameController.text,
       "groupId": groupId,
-      "admin": sharedPreferences!.getString("uid")
+      "admin": sharedPreferences!.getString("uid"),
+      "bookUrl": bookImageUrl
     });
   }
 
@@ -179,7 +247,8 @@ class _CreateGroupState extends State<CreateGroup> {
       "authorName": _authorController.text,
       "bookName": _bookNameController.text,
       "groupId": groupId,
-      "admin": sharedPreferences!.getString("uid")
+      "admin": sharedPreferences!.getString("uid"),
+       "bookUrl": bookImageUrl
     });
   }
 
@@ -191,6 +260,7 @@ class _CreateGroupState extends State<CreateGroup> {
         setState(() {
           creatingGroup = true;
         });
+        await uploadImage();
         await createGroupForUser();
         await createGroupForEveryOne().then((value) {
           Navigator.pop(context);
@@ -238,7 +308,6 @@ class _CreateGroupState extends State<CreateGroup> {
       ),
     ).py12();
   }
-
 
   Widget categorySelect(String label, int color) {
     return InkWell(
@@ -311,8 +380,8 @@ class _CreateGroupState extends State<CreateGroup> {
 
   Widget label(String label) {
     return Text(label,
-        style: const TextStyle(
-          color: Colors.white60,
+        style: TextStyle(
+          color: Colors.indigo[900]!,
           fontWeight: FontWeight.w600,
           fontSize: 16.5,
           letterSpacing: 0.2,

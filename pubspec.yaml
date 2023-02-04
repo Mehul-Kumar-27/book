@@ -54,6 +54,10 @@ dependencies:
   fluttertoast: ^8.0.9
   google_fonts: ^3.0.1
   google_nav_bar: ^5.0.6
+  font_awesome_flutter: ^10.3.0
+  neon: ^0.1.0
+  slide_to_act: ^2.0.1
+  firebase_storage: ^11.0.10
 
 dev_dependencies:
   flutter_test:
