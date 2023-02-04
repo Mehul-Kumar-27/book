@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:neon/neon.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 
 import '../../auth/auth_exception.dart';
 import '../../auth/bloc/auth_bloc.dart';
@@ -67,7 +70,7 @@ class _RegisterViewState extends State<RegisterView> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         body: Container(
           padding: EdgeInsets.only(top: screenHeight(30)),
           child: Padding(
@@ -81,24 +84,35 @@ class _RegisterViewState extends State<RegisterView> {
                     SizedBox(
                       height: screenHeight(42),
                     ),
-                    Text(
-                      "Register",
-                      style: GoogleFonts.poppins(
-                        fontSize: screenWidth(22.24),
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.mainColor,
-                      ),
+                    // Text(
+                    //   "Register",
+                    //   style: GoogleFonts.poppins(
+                    //     fontSize: screenWidth(22.24),
+                    //     fontWeight: FontWeight.w600,
+                    //     color: AppColors.mainColor,
+                    //   ),
+                    // ),
+
+                    Neon(
+                      text: "Register",
+                      color: Colors.blue,
+                      fontSize: 40,
+                      font: NeonFont.Beon,
+                      flickeringText: true,
+                      flickeringLetters: null,
+                      glowingDuration: new Duration(seconds: 5),
                     ),
                     SizedBox(
-                      height: screenHeight(6.94),
+                      height: screenHeight(40),
                     ),
-                    Text(
-                      "Let's setup your account",
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w400,
-                        fontSize: screenWidth(11.8),
-                        color: AppColors.textColor1,
-                      ),
+                    Neon(
+                      text: "Let's setup your account",
+                      color: Colors.blue,
+                      fontSize: 20,
+                      font: NeonFont.Beon,
+                      flickeringText: true,
+                      flickeringLetters: null,
+                      glowingDuration: new Duration(seconds: 10),
                     ),
                     SizedBox(
                       height: screenHeight(14),
@@ -111,29 +125,39 @@ class _RegisterViewState extends State<RegisterView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Username",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w400,
-                              fontSize: screenWidth(11.8),
-                              color: AppColors.textColor,
-                            ),
-                          ),
+                          // Text(
+                          //   "Username",
+                          //   style: GoogleFonts.poppins(
+                          //     fontWeight: FontWeight.w400,
+                          //     fontSize: screenWidth(11.8),
+                          //     color: AppColors.textColor,
+                          //   ),
+                          // ),
+                          //                Neon(
+                          //   text: "Username",
+                          //   color: Colors.blue,
+                          //   fontSize: 30,
+                          //   font: NeonFont.Beon,
+                          //   flickeringText: true,
+                          //   flickeringLetters: null,
+                          //   glowingDuration: new Duration(seconds: 5),
+                          // ),
                           SizedBox(
                             height: screenHeight(10.41),
                           ),
                           SizedBox(
                             height: screenHeight(50),
                             child: TextField(
+                               style: TextStyle(color:Colors.white),
                               controller: _username,
                               enableSuggestions: false,
                               autocorrect: false,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 hintStyle: GoogleFonts.poppins(
-                                  color: AppColors.textColor1,
+                                  color: Colors.white,
                                 ),
-                                hintText: 'someone@gmail.com',
+                                hintText: 'Username',
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(screenHeight(6.94)),
@@ -145,29 +169,30 @@ class _RegisterViewState extends State<RegisterView> {
                           SizedBox(
                             height: screenHeight(27.8),
                           ),
-                          Text(
-                            "Email Address",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w400,
-                              fontSize: screenWidth(11.8),
-                              color: AppColors.textColor,
-                            ),
-                          ),
+                          // Text(
+                          //   "Email Address",
+                          //   style: GoogleFonts.poppins(
+                          //     fontWeight: FontWeight.w400,
+                          //     fontSize: screenWidth(11.8),
+                          //     color: AppColors.textColor,
+                          //   ),
+                          // ),
                           SizedBox(
                             height: screenHeight(10.41),
                           ),
                           SizedBox(
                             height: screenHeight(50),
                             child: TextField(
+                               style: TextStyle(color:Colors.white),
                               controller: _email,
                               enableSuggestions: false,
                               autocorrect: false,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 hintStyle: GoogleFonts.poppins(
-                                  color: AppColors.textColor1,
+                                  color: Colors.white,
                                 ),
-                                hintText: 'someone@gmail.com',
+                                hintText: 'Email',
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(screenHeight(6.94)),
@@ -179,29 +204,30 @@ class _RegisterViewState extends State<RegisterView> {
                           SizedBox(
                             height: screenHeight(27.8),
                           ),
-                          Text(
-                            "Password",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w400,
-                              fontSize: screenWidth(11.8),
-                              color: Colors.black,
-                            ),
-                          ),
+                          // Text(
+                          //   "Password",
+                          //   style: GoogleFonts.poppins(
+                          //     fontWeight: FontWeight.w400,
+                          //     fontSize: screenWidth(11.8),
+                          //     color: Colors.black,
+                          //   ),
+                          // ),
                           SizedBox(
                             height: screenHeight(10.41),
                           ),
                           SizedBox(
                             height: screenHeight(50),
                             child: TextField(
+                               style: TextStyle(color:Colors.white),
                               controller: _password,
                               obscureText: true,
                               enableSuggestions: false,
                               autocorrect: false,
                               decoration: InputDecoration(
                                 hintStyle: GoogleFonts.poppins(
-                                  color: AppColors.textColor1,
+                                  color: Colors.white,
                                 ),
-                                hintText: '***********',
+                                hintText: 'Password',
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(screenHeight(6.94)),
@@ -213,52 +239,60 @@ class _RegisterViewState extends State<RegisterView> {
                           SizedBox(
                             height: screenHeight(42),
                           ),
-                          SizedBox(
-                            width: screenWidth(328.7),
-                            height: screenWidth(34.7),
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                backgroundColor: AppColors.mainColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                              ),
-                              onPressed: () async {
-                                final email = _email.text;
-                                final password = _password.text;
-                                final username = _username.text;
-                                context.read<AuthBloc>().add(
-                                      AuthEventRegister(
-                                        email,
-                                        password,
-                                        username,
-                                      ),
-                                    );
-                              },
-                              child: SizedBox(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: screenWidth(9.86),
-                                    ),
-                                    Text(
-                                      "Register",
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontSize: screenWidth(12.51),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    const Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                          SlideAction(
+                            outerColor: Color(0xFF2962FF),
+                            height: 60,
+                            // width:,
+                            sliderButtonIcon: Icon(
+                              FontAwesomeIcons.arrowRight,
+                              size: 20,
+                              color: Color(0xFF2962FF),
                             ),
+                            text: "REGISTER",
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                            onSubmit: () async {
+                              final email = _email.text;
+                              final password = _password.text;
+                              final username = _username.text;
+                              context.read<AuthBloc>().add(
+                                    AuthEventRegister(
+                                      email,
+                                      password,
+                                      username,
+                                    ),
+                                  );
+                            },
+                            //     child: SizedBox(
+                            //       child: Row(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceBetween,
+                            //         children: [
+                            //           SizedBox(
+                            //             width: screenWidth(9.86),
+                            //           ),
+                            //           Text(
+                            //             "Register",
+                            //             style: GoogleFonts.poppins(
+                            //               color: Colors.white,
+                            //               fontSize: screenWidth(12.51),
+                            //               fontWeight: FontWeight.w500,
+                            //             ),
+                            //           ),
+                            //           const Icon(
+                            //             Icons.arrow_forward,
+                            //             color: Colors.white,
+                            //           ),
+
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+
+                            // ),
                           ),
                           SizedBox(
                             height: screenHeight(27.76),
