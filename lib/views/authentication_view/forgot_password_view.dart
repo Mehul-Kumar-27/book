@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:neon/neon.dart';
 
 import '../../auth/bloc/auth_bloc.dart';
 import '../../auth/bloc/auth_event.dart';
@@ -51,7 +52,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(
@@ -65,7 +66,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             },
           ),
           centerTitle: true,
-          backgroundColor: AppColors.mainColor,
+          backgroundColor: Color(0xFF2962FF),
           title: Text(
             'Forgot Password',
             style: GoogleFonts.poppins(
@@ -94,23 +95,24 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   SizedBox(
                     height: screenHeight(13.88),
                   ),
-                  Text(
-                    "Forgot\nPassword?",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: screenHeight(18.74),
-                      color: AppColors.mainColor,
-                    ),
-                  ),
+                  Neon(
+              text: "Forgot Password ?",
+              color: Colors.blue,
+              fontSize: 20,
+              font: NeonFont.Beon,
+              flickeringText: false,
+              flickeringLetters: null,
+              glowingDuration: new Duration(seconds: 5),
+            ),
                   SizedBox(
-                    height: screenHeight(18.74),
+                    height: screenHeight(15.74),
                   ),
                   Text(
                     "Don't worry it happens. Please enter your email address and we will send you a link to reset your password.",
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w500,
                       fontSize: screenWidth(11.8),
-                      color: AppColors.textColor1,
+                      color: Colors.grey,
                     ),
                   ),
                   SizedBox(
@@ -131,6 +133,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           borderRadius: BorderRadius.all(
                             Radius.circular(10.0),
                           ),
+                          
                         ),
                       ),
                     ),
@@ -142,7 +145,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     height: screenWidth(34.7),
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: AppColors.mainColor,
+                        backgroundColor: Color(0xFF2962FF),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
