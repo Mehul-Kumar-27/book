@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:book/views/book_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -127,10 +128,13 @@ class _AlarmViewState extends State<AlarmView> {
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CreateGroup()));
-        }),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CreateGroup()));
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -153,8 +157,11 @@ class _GroupDesignState extends State<GroupDesign> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BookDetail(model: widget.model)));
       },
       child: Material(
         borderRadius: BorderRadius.circular(20),
