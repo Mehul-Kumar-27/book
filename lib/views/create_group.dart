@@ -23,6 +23,8 @@ class _CreateGroupState extends State<CreateGroup> {
   String type = "";
   String category = "";
 
+  final _form = GlobalKey<FormState>();
+
   late DateTime _selectedDate;
   String dateText = "";
   late String time;
@@ -42,112 +44,115 @@ class _CreateGroupState extends State<CreateGroup> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(color: Colors.black87),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      CupertinoIcons.arrow_left_circle,
-                      color: Colors.blue[300],
-                      size: 28,
-                    )),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      creatingGroup
-                          ? const LinearProgressIndicator()
-                          : Container(),
-                      "Create"
-                          .text
-                          .textStyle(GoogleFonts.poppins(
-                              fontSize: 30,
-                              color: Colors.blue[500],
-                              fontWeight: FontWeight.bold))
-                          .make(),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      "New Group"
-                          .text
-                          .textStyle(GoogleFonts.poppins(
-                              fontSize: 30,
-                              color: Colors.blue[500],
-                              fontWeight: FontWeight.bold))
-                          .make(),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      label("Book Name"),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      bookName(),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      label("Author Name"),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      authorName(),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      label("Description"),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      description(),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      label("Category"),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Wrap(
-                        runSpacing: 10,
-                        children: [
-                          categorySelect("Horror", 0xff6d6e),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          categorySelect("Biopic", 0xff29732),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          categorySelect("Fantasy", 0xff6557ff),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          categorySelect("Fiction", 0xff234ebd),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          categorySelect("Poetry", 0xff2bc8d9),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      button(),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                    ],
+          child: Form(
+            key: _form,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-              ],
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        CupertinoIcons.arrow_left_circle,
+                        color: Colors.blue[300],
+                        size: 28,
+                      )),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        creatingGroup
+                            ? const LinearProgressIndicator()
+                            : Container(),
+                        "Create"
+                            .text
+                            .textStyle(GoogleFonts.poppins(
+                                fontSize: 30,
+                                color: Colors.blue[500],
+                                fontWeight: FontWeight.bold))
+                            .make(),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        "New Group"
+                            .text
+                            .textStyle(GoogleFonts.poppins(
+                                fontSize: 30,
+                                color: Colors.blue[500],
+                                fontWeight: FontWeight.bold))
+                            .make(),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        label("Book Name"),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        bookName(),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        label("Author Name"),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        authorName(),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        label("Description"),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        description(),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        label("Category"),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Wrap(
+                          runSpacing: 10,
+                          children: [
+                            categorySelect("Horror", 0xff6d6e),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            categorySelect("Biopic", 0xff29732),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            categorySelect("Fantasy", 0xff6557ff),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            categorySelect("Fiction", 0xff234ebd),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            categorySelect("Poetry", 0xff2bc8d9),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        button(),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -191,10 +196,13 @@ class _CreateGroupState extends State<CreateGroup> {
         setState(() {
           creatingGroup = true;
         });
-        await createGroupForUser();
-        await createGroupForEveryOne().then((value) {
-          Navigator.pop(context);
-        });
+        if (_form.currentState!.validate()) {
+          _form.currentState!.save();
+          await createGroupForUser();
+          await createGroupForEveryOne().then((value) {
+            Navigator.pop(context);
+          });
+        }
       },
       child: Container(
         height: 56,
@@ -239,7 +247,6 @@ class _CreateGroupState extends State<CreateGroup> {
     ).py12();
   }
 
-
   Widget categorySelect(String label, int color) {
     return InkWell(
       onTap: () {
@@ -271,6 +278,13 @@ class _CreateGroupState extends State<CreateGroup> {
       ),
       child: TextFormField(
         controller: _authorController,
+        validator: (value) {
+          if (value.toString().isEmpty) {
+            return " Field cannot be empty";
+          } else {
+            return null;
+          }
+        },
         style: const TextStyle(
           color: Colors.white70,
           fontSize: 17,
@@ -295,6 +309,13 @@ class _CreateGroupState extends State<CreateGroup> {
       ),
       child: TextFormField(
         controller: _bookNameController,
+        validator: (value) {
+          if (value.toString().isEmpty) {
+            return " Field cannot be empty";
+          } else {
+            return null;
+          }
+        },
         style: const TextStyle(
           color: Colors.white70,
           fontSize: 17,
