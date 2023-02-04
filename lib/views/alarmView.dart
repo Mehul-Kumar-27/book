@@ -196,12 +196,15 @@ class _GroupDesignState extends State<GroupDesign> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  "Name: ${widget.model.bookName}"
-                      .text
-                      .textStyle(GoogleFonts.poppins(
-                        fontSize: 17,
-                      ))
-                      .make(),
+                  Flexible(
+                    child: "${widget.model.bookName}"
+                        .text
+                        .textStyle(GoogleFonts.poppins(
+                          fontSize: 17,
+                        ))
+                        .overflow(TextOverflow.ellipsis)
+                        .make(),
+                  ),
                   "Author: ${widget.model.authorName}"
                       .text
                       .textStyle(GoogleFonts.poppins(

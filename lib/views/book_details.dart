@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:book/views/community.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -122,9 +123,6 @@ class _BookDetailState extends State<BookDetail> {
               .overflow(TextOverflow.clip)
               .make()
               .px16(),
-          const SizedBox(
-            height: 20,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -148,6 +146,18 @@ class _BookDetailState extends State<BookDetail> {
           const SizedBox(
             height: 20,
           ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Community(model: widget.model,)));
+                  },
+                  icon: const Icon(Icons.message)),
+              "Join Community".text.make()
+            ],
+          )
         ],
       ),
     );

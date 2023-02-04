@@ -228,8 +228,8 @@ class _CreateGroupState extends State<CreateGroup> {
     FirebaseFirestore.instance
         .collection("user")
         .doc(sharedPreferences!.getString("uid"))
-        .collection("groups")
-        .add({
+        .collection("groups").doc(groupId)
+        .set({
       "category": category,
       "description": _description.text,
       "authorName": _authorController.text,
@@ -241,7 +241,7 @@ class _CreateGroupState extends State<CreateGroup> {
   }
 
   Future createGroupForEveryOne() async {
-    FirebaseFirestore.instance.collection("groups").add({
+    FirebaseFirestore.instance.collection("groups").doc(groupId).set({
       "category": category,
       "description": _description.text,
       "authorName": _authorController.text,
