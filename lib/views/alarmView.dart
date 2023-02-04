@@ -99,8 +99,7 @@ class _AlarmViewState extends State<AlarmView> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CreateGroup()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateGroup()));
         }),
       ),
     );
