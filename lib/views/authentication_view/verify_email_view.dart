@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 
 
 import '../../auth/bloc/auth_bloc.dart';
@@ -58,7 +60,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(screenWidth(11.11)),
@@ -82,49 +84,46 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                   SizedBox(
                     height: screenWidth(34.71),
                   ),
-                  Text(
-                    "We have sent you an email verification link. Please check your email and click on the link to verify your email address. If you don't see the email in your inbox, please check your spam folder. or click the button below, we will send you a new link.",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w500,
-                      fontSize: screenWidth(11.8),
-                      color: AppColors.textColor1,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenHeight(34.7),
-                  ),
-                  SizedBox(
-                    height: screenWidth(34.7),
-                    width: 500,
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: AppColors.mainColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
+  SlideAction(
+outerColor: Color(0xFF2962FF),
+              height: 60,
+              // width:,
+              sliderButtonIcon: Icon(
+                FontAwesomeIcons.arrowRight,
+                size: 20,
+                color:Color(0xFF2962FF),
+                
+              ),
+              text: "Swipe to get link",
+              textStyle: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+                      onSubmit: () {
                         context.read<AuthBloc>().add(
                               const AuthEventSendEmailVerification(),
                             );
                       },
-                      child: SizedBox(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Send Verification Link",
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: screenWidth(11.8),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  //     child: SizedBox(
+                  //       child: Column(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Text(
+                  //             "Send Verification Link",
+                  //             style: GoogleFonts.poppins(
+                  //               color: Colors.white,
+                  //               fontWeight: FontWeight.w500,
+                  //               fontSize: screenWidth(11.8),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+
+                  // ),
+  ),
                   SizedBox(
                     height: screenHeight(27.8),
                   ),
